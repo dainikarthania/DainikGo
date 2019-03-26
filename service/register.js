@@ -11,7 +11,7 @@ module.exports={
     secure: true, // true for 465, false for other ports
     auth: {
       user: 'dainik.arthania3@gmail.com', // generated ethereal user
-      pass: 'Dainik@000' // generated ethereal password
+      pass: 'Dainik@@000' // generated ethereal password
     }
   });
   let mailOptions = {
