@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>
+            Dainik Follows 
+        </title>
+        <body>
+          <ul>
+                <%checkdata=new Set()%>
+                <%checkdata1=new Set()%>
+                <%checkdata2=new Set()%>
+                <%checkdata3=new Set()%>
+
+                <%all.map(value=>{%>
+                    <%checkdata.add(value.followingId)%>
+                <%})%>
+
+                <%allfollowing.map(value=>{%>
+                    <%if(value.status==1){%>
+                        <%checkdata1.add(value.followId)%>
+                        <%}else{%>
+                            <%checkdata2.add(value.followId)%>
+                            <%}%>
+                            <%if(value.follows==true){%>
+                                <%checkdata3.add(value.followId)%>
+                                <%}%>
+                            
+                <%})%>
+
+                <%alluser.map(e=>{%>
+                    <%if(e.id!==cuid && checkdata3.has(e.id)==false && checkdata1.has(e.id)==true){%>
+                        <li><%=e.Name%></li><a href="/followback/<%=e.id%>/<%=e.private%>">followBack</a>      
+                        <%}else if(e.id!==cuid && checkdata2.has(e.id)==true){%>
+                            <li><%=e.Name%></li><a href="/Acceptfollowuser/<%=e.id%>/<%=e.private%>">Accept</a> <a href="/followuser/<%=e.id%>/<%=e.private%>">Cancel</a>
+                            <%}else if(e.id!==cuid && checkdata3.has(e.id)==true){%>
+                                <li><%=e.Name%></li><a href="/unfollowusern/<%=e.id%>/<%=e.private%>">UnFollow</a>
+                                <%}%>
+                <%})%>      
+                  <h1>-------------------------------------------------------------------------</h1>
+            <%user.map(e=>{%>
+                <%if(e.id!==cuid && checkdata.has(e.id)==false){%>
+                    <li><%=e.Name%></li><a href="/followuser/<%=e.id%>/<%=e.private%>">follow</a>      
+                    <%}else if(checkdata.has(e.id)==true && e.private==1){%>
+                          <li><%=e.Name%></li><a href="/unfollowuser/<%=e.id%>/<%=e.private%>">CancelRequsted</a>
+                    <%}else if(checkdata.has(e.id)==true){%>
+                        <li><%=e.Name%></li><a href="/unfollowuser/<%=e.id%>/<%=e.private%>">UnFollow</a>
+                        <%}%>
+         
+            <%})%>
+          </ul>
+        </body>
+    </head>
+</html>

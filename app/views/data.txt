@@ -1,0 +1,240 @@
+
+//for current user follow and following
+       <table border="2px solid black">
+          <%data.map(user=>{%>
+        <tr>
+                <%if(user.id!==userid){%>
+            <td>
+                <%=user.Name%>
+                <td><button onclick="senddata('<%=user.id%>','<%=userid%>')">Follow</button></td>
+            </td>
+            <%}%>
+            </tr>
+        <%});%>
+    </table>
+
+
+
+
+
+
+<%followuser.map(e=>{%>
+        <% if(user.id==e.followingId){%>
+                <td><button onclick="senddata('<%=user.id%>')">Unfollow</button></td>
+        </tr>
+                <%}%>                 
+        <%})%>
+
+    <% followuser=user.follows.filter(follow => follow.followId==userid) %>
+    <% followinguser=user.follows.filter(follow => follow.followingId==userid) %>
+
+    
+
+            <%followinguser.map(e=>{%>
+                <%=user.id%>
+                <% if(user.id==e.followId){%>
+                        <td><button onclick="senddata('<%=user.id%>')">Accept</button></td>
+                </tr>
+                        <%}%> 
+                            
+    <%})%>
+
+    <% if(user.id!==userid){%>
+        <td><button onclick="senddata('<%=user.id%>')">Follow</button></td>
+<%}%>
+
+
+
+
+
+
+
+
+
+ <%arrdata=[]%>
+               
+<% data.map(user=>{%>
+
+    <% if(user.id!==userid){%>
+        
+        <tr>
+            <td><%= user.Name%></td>
+        </tr>
+    <%}%>
+<%arrdata.push(user.id)%>
+        <%}) %>
+      
+        <% data.map(user=>{%>
+            <% followuser=user.follows.filter(follow => follow.followId==userid) %>
+            <% followinguser=user.follows.filter(follow => follow.followingId==userid) %>
+<%=followuser%>
+<%=followinguser%>
+
+            <%followuser.map(e=>{%>
+                <% if(arrdata.indexOf(e.followingId)>0){%>
+                    <tr>
+                        <td><button onclick="senddata('<%=user.id%>')">Unfollow</button></td>
+                </tr>
+                        <%}%>                 
+                <%})%>
+        
+            
+        
+                    <%followinguser.map(e=>{%>
+                        <% if(arrdata.indexOf(e.followId)>0){%>
+                            <tr>
+                                <td><button onclick="senddata('<%=user.id%>')">Accept</button></td>
+                        </tr>
+                                <%}%> 
+                                    
+            <%})%>
+        
+        
+        <%}%>
+
+
+
+                <%}) %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                //new 
+
+
+
+                                    <%arrdata=[]%>
+<% data.map(user=>{%>
+
+    <% if(user.id!==userid){%>
+        
+        <tr>
+            <td><%= user.Name%></td>
+
+    <%}%>
+    <%arrdata.push(user.id)%>
+<%})%>
+
+<% data.map(user=>{%>
+    <% followuser=user.follows.filter(follow => follow.followId==userid) %>
+    <% followinguser=user.follows.filter(follow => follow.followingId==userid) %>
+
+    <% if(Object.keys(followuser).length){ %>
+
+    <%followuser.map(e=>{%>
+
+        <% if(arrdata.indexOf(e.followingId)>0){%>
+                <td><button onclick="senddata('<%=user.id%>')">Unfollow</button></td>
+        </tr>
+                <%}%>                 
+        <%})%>
+
+<%}else if(Object.keys(followinguser).length){%>
+
+            <%followinguser.map(e=>{%>
+                foww<%=e.followId%>
+                <% if(arrdata.indexOf(e.followId)>0){%>
+                        <td><button onclick="senddata('<%=user.id%>')">Accept</button></td>
+                </tr>
+                        <%}%>                  
+
+    <%})%>
+
+<%}else{%>
+    <% if(user.id!==userid){%>
+        <td><button onclick="senddata('<%=user.id%>')">Follow</button></td>
+    </tr>
+<%}%>
+<%}%>
+        <%}) %>
+
+
+
+    /// last one 
+
+
+
+     <%arrdata=[]%>
+                    <% data.map(user=>{%>
+                        <%arrdata.push(user.id)%>
+                    <%})%>
+
+<% data.map(user=>{%>
+
+    <% if(user.id!==userid){%>
+        
+        <tr>
+            <td><%= user.Name%></td>
+
+    <%}%>
+
+    <% followuser=user.follows.filter(follow => follow.followId==userid) %>
+    <% followinguser=user.follows.filter(follow => follow.followingId==userid) %>
+    
+    <% if(Object.keys(followuser).length){ %>
+
+    <%followuser.map(e=>{%>
+    <% if(arrdata.indexOf(e.followingId)>=0){%>
+                <td><button onclick="senddata('<%=user.id%>')">Unfollow</button></td>
+        </tr>
+                <%}%>                 
+        <%})%>
+<%}else if(Object.keys(followinguser).length){%>
+            <%followinguser.map(e=>{%>
+                <%=e.followId%>
+                <% if(arrdata.indexOf(e.followId)>=0){%>
+                        <td><button onclick="senddata('<%=user.id%>')">Accept</button></td>
+                </tr>
+                        <%}%>                    
+
+    <%})%>
+
+<%}else if(Object.keys(followinguser).length==0 && Object.keys(followinguser).length==0 ){%>
+    <%=user.id%>
+    <% if(user.id!==userid){%>
+        <td><button onclick="senddata('<%=user.id%>')">Follow</button></td>
+    </tr>
+<%}%>
+<%}%>
+        <%}) %>
+
+
+
+
+
+
+
+        ------new
+
+
+        <%user.map(usere=>{%>
+    <tr>
+            <td>
+                    <%=usere.Name%> 
+            </td>
+    <%follow.map(followuser=>{%>
+    <% if(userid==followuser.followId){%>
+        <td><button onclick="senddata('<%=user.id%>')">Unfollow</button></td>
+    </tr>
+<%}%>
+<% if(userid==followuser.followingId){%>
+    <td><button onclick="senddata('<%=user.id%>')">Accept</button></td>
+</tr>
+<%}%>
+
+
+        <%})%>
+  
+    <%})%>

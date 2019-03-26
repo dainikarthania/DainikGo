@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>
+            DainikGo 
+        </title>
+        <body>
+            <form action="/register" method="POST">
+            <input type="text" name="name" placeholder="FullName" required>
+            <input type="password" name="pwd" placeholder="Password" required>
+            <input type="password" name="cpwd" placeholder="Confirm-Password" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="date" name="DOB" placeholder="Birthday" required>
+            <input type="radio" name="gender" value="male" checked>male
+            <input type="radio" name="gender" value="female">female
+            <input type="submit" name="submit" value="Register">
+            </form>
+            <%=msg%>
+        </body>
+    </head>
+</html>

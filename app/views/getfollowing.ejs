@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>
+            Dainik Follows 
+        </title>
+        <body>
+            <%checkdata=new Set()%>
+            <%checkdata1=new Set()%>
+
+            <%old.map(value=>{%>
+                <%checkdata.add(value.followId)%>
+            <%})%>
+
+            <%newdata.map(value=>{%>
+                <%checkdata1.add(value.followId)%>
+            <%})%>
+
+            <%user.map(e=>{%>
+                <%if(e.id!==cid && checkdata1.has(e.id)){%>
+                    <li><%=e.Name%></li><a href="/getunfollowuser/<%=e.id%>/<%=e.private%>">UnFollow</a>
+                    <%}else if(e.id!==cid && checkdata.has(e.id)){%>
+                        <li><%=e.Name%></li><a href="/getfollowuser/<%=e.id%>/<%=e.private%>">Follow</a>
+                        <%}%>
+                <%})%>
+        </body>
+    </head>
+</html>

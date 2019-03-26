@@ -1,0 +1,175 @@
+<html>
+    <head>
+        <title>
+            Dainik Follows 
+        </title>
+    <script>
+    function follow(fid){
+        var http = new XMLHttpRequest();
+    console.log(fid)
+        data=`fid=${fid}`;
+        
+        http.open('POST', "/follow", true);
+
+    //Send the proper header information along with the request
+    http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    http.onreadystatechange = function() {//Call a function when the state changes.
+        if(http.readyState == 4 && http.status == 200) {
+        }
+    }
+    http.send(encodeURI(data));
+    }
+
+function unfollow(fid){
+    var http = new XMLHttpRequest();
+    data=`fid=${fid}`;
+    console.log(data)
+    http.open('POST', "/unfollow", true);
+
+//Send the proper header information along with the request
+http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+http.onreadystatechange = function() {//Call a function when the state changes.
+    if(http.readyState == 4 && http.status == 200) {
+    }
+}
+http.send(encodeURI(data));
+}
+
+function cancelfollow(fid){
+    var http = new XMLHttpRequest();
+console.log(fid)
+    data=`fid=${fid}`;
+    
+    http.open('POST', "/cancelfollow", true);
+
+//Send the proper header information along with the request
+http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+http.onreadystatechange = function() {//Call a function when the state changes.
+    if(http.readyState == 4 && http.status == 200) {
+    }
+}
+http.send(encodeURI(data));
+}
+
+function cancelReq(fid){
+    var http = new XMLHttpRequest();
+console.log(fid)
+    data=`fid=${fid}`;
+    
+    http.open('POST', "/cancelReq", true);
+
+//Send the proper header information along with the request
+http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+http.onreadystatechange = function() {//Call a function when the state changes.
+    if(http.readyState == 4 && http.status == 200) {
+    }
+}
+http.send(encodeURI(data));
+}
+
+function acceptfollow(fid){
+    var http = new XMLHttpRequest();
+console.log(fid)
+    data=`fid=${fid}`;
+    
+    http.open('POST', "/acceptfollow", true);
+
+//Send the proper header information along with the request
+http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+http.onreadystatechange = function() {//Call a function when the state changes.
+    if(http.readyState == 4 && http.status == 200) {
+    }
+}
+http.send(encodeURI(data));
+}
+
+
+function setprivate(userid){
+    var http = new XMLHttpRequest();
+console.log(userid)
+    data=`uid=${userid}`;
+    
+    http.open('POST', "/setprivate", true);
+
+//Send the proper header information along with the request
+http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+http.onreadystatechange = function() {//Call a function when the state changes.
+    if(http.readyState == 4 && http.status == 200) {
+    }
+}
+http.send(encodeURI(data));
+}
+    </script>
+    <style>
+    button{
+        border:0;
+        padding: 0;
+        background-color: lightgreen;
+    }
+    </style>
+    </head>
+        <body>
+            
+            private:<button onclick="setprivate('<%=userid%>')">ON</button>
+
+            <table>
+                YOU HAVE TOTAL FOLLOW <%= totalfollow.totalfollow %>
+        <%checkdata=new Set()%>
+<%user.map(user=>{%>
+    <%if(user.id!==userid){%>
+        <tr>
+
+                <td><%=user.Name%></td>
+        
+        <%}%>
+
+
+        <%userfollow.map(fcheck=>{%>
+            <%checkdata.add(fcheck.followId)%>
+            <%checkdata.add(fcheck.followingId)%>
+                <%})%>
+               
+        
+              <%if(userfollow.length==0){%>
+                <%if(user.id!==userid){%>
+                    <tr>
+            
+                            <td><button onclick="follow('<%=user.id%>')"><a href="/login">Follow</a></button></td>
+                    </tr>
+                    <%}%>
+                <%}else{%>  
+  <%userfollow.map(userfollow=>{%>
+    <%if(user.id==userfollow.followId && user.id!==userid && userfollow.status==0){%>
+        <td><button onclick="acceptfollow('<%=user.id%>')"><a href="/login">Accept</a></button></td>
+        <td><button  onclick="cancelReq('<%=user.id%>')"><a href="/login">Cancel</a></button></td>
+
+    </tr>
+        <%}else if(user.id==userfollow.followingId && user.id!==userid && userfollow.status==0){%>
+
+            <td><button onclick="cancelfollow('<%=user.id%>')"><a href="/login">Cancel Follow</a></button></td>
+        </tr>
+                <%}else if(checkdata.has(user.id)==false && user.id!==userid ){%>
+                    <%checkdata.add(user.id)%>
+                    <td><button onclick="follow('<%=user.id%>')"><a href="/login">Follow</a></button></td>
+                </tr>
+                    <%}else if((user.id==userfollow.followId || user.id==userfollow.followingId) && user.id!==userid && userfollow.status==1 ){%>
+                        <td><button onclick="unfollow('<%=user.id%>')"><a href="/login">UnFollow</a></button></td>
+
+                        <%}%>
+      <%})%> 
+      <%}%>   
+
+    <%})%>
+
+    
+                   
+    </table>
+        </body>
+
+</html>
