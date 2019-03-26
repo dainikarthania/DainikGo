@@ -14,7 +14,6 @@ appstart.home.home()
 appstart.followPage.follwpage()
 appstart.setting.private()
 app.listen(PORT, () => {
-console.log(PORT)
     console.log(`Server started on port`);
 });
 
