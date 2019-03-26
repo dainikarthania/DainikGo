@@ -2,5 +2,5 @@ const Sequelize=require('sequelize')
 
 
 // module.exports= sequelize=new Sequelize('postgres://postgres:1234@localhost:5432/postgres')
-module.exports= sequelize=new Sequelize('postgres://wkslwskgjhnxgl:70d6db33c047332089703c3eda77a35e426a85b9f2f4b868200018f459fa5065@ec2-184-73-216-48.compute-1.amazonaws.com:5432/dahg5pir178fd1')
+module.exports= sequelize=new Sequelize('postgres://fxkesxqqwacixh:1b2639569b198ca06c36487793d496125f63901be667cbeb97795d67ce2aa306@ec2-54-221-236-144.compute-1.amazonaws.com:5432/do722hfo6jhb7')
 
