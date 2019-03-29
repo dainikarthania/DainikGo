@@ -33,9 +33,10 @@ getfollowing:function(id){
     })
 },
 getAllUser:function(id){
-sql=`with follow as(select *from dainikgo."Users" where id not in (select "followingId" from dainikgo.follows where "followId"=${id}))
-select id,"Name",private from follow where id not in(select "followId" from dainikgo.follows where "followingId"=${id})`;
-
+// sql=`with follow as(select *from dainikgo."Users" where id not in (select "followingId" from dainikgo.follows where "followId"=${id}))
+// select id,"Name",private from follow where id not in(select "followId" from dainikgo.follows where "followingId"=${id})`;
+sql=`with follow as(select *from "Users" where id not in (select "followingId" from follows where "followId"=${id}))
+select id,"Name",private from follow where id not in(select "followId" from follows where "followingId"=${id})`;
 return sequelize.query(sql,{type: sequelize.QueryTypes.SELECT}).then(value=>{
     if(_.isEmpty(value)) return value
     else
@@ -83,7 +84,9 @@ getallfollowing:function(id){
     })
 },
 alluser:function(id){
-    sql=`with follow as(select *from dainikgo."Users" where id not in (select "followingId" from dainikgo.follows where "followId"=${id}))
+    // sql=`with follow as(select *from dainikgo."Users" where id not in (select "followingId" from dainikgo.follows where "followId"=${id}))
+    // select *from follow`;
+    sql=`with follow as(select *from "Users" where id not in (select "followingId" from follows where "followId"=${id}))
     select *from follow`;
     return sequelize.query(sql,{type: sequelize.QueryTypes.SELECT}).then(value=>{
         if(_.isEmpty(value)) return value
