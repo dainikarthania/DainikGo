@@ -21,8 +21,8 @@ app.use(session({  secret: 'DAINIKARTHANIA007))',
 
 const Op = Sequelize.Op;
 
-//relation of table get 
-relation.releation.follow_relation()
+// //relation of table get 
+// relation.releation.follow_relation()
 
 
 app.get('/', (req, res) => {

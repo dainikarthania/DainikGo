@@ -6,6 +6,7 @@ var session = require('express-session')
 const async=require('async');
 let db=require("../model")
 let service=require('../service')
+let relation=require("../relation")
 let moment=require('moment')
 var path = require('path');
 const fileUpload = require('express-fileupload');
@@ -15,6 +16,8 @@ module.exports={
     home:function(){
          //set view engine
  app.set('views', path.join(__dirname, './views'));
+//relation of table get 
+relation.releation.follow_relation()
 
  app.set('view engine', 'ejs');
  //post data set
